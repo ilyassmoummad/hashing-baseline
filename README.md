@@ -43,7 +43,7 @@ The figure below shows **two query images** and their **5 nearest neighbors** re
 - **Original features**  
 - **Hashed 16-bit codes**  
 
-<img src="figures/5NN_retreival.png" alt="5-NN Retrieval" width="800"/>
+<img src="figures/5NN_retrieval.png" alt="5-NN Retrieval" width="800"/>
 
 This demonstrates that Hashing-Baseline preserves semantic similarity.
 
