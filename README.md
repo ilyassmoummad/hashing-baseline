@@ -1,7 +1,9 @@
-# Hashing-Baseline: Rethinking hashing in the age of pretrained models
+# Hashing-Baseline: Rethinking Hashing in the Age of Pretrained Models
+
 [![arXiv](https://img.shields.io/badge/arXiv-2509.14427-b31b1b.svg)](https://arxiv.org/abs/2509.14427)
 
-## Authors
+## 👩‍💻 Authors
+
 <sup>1</sup> Ilyass Moummad, <sup>1,2</sup> Kawtar Zaher, <sup>3</sup> Lukas Rauch, <sup>1</sup> Alexis Joly
 
 <sup>1</sup> INRIA, LIRMM, Université de Montpellier, France <br>
@@ -10,46 +12,54 @@
 
 ---
 
-## Retrieval with Hashing Using PCA + Random Orthogonal Projection
+## 🏗️ Repository Overview
 
-This repository implements retrieval systems for **image** and **audio** data based on learned deep features combined with efficient hashing. The hashing technique leverages **PCA + random orthogonal projection** to generate compact binary codes that preserve semantic similarity and enable fast retrieval.
+This repository demonstrates a **simple, training-free baseline** for retrieval of **images** and **audio**. It works by **combining deep pre-trained features with traditional hashing steps** — **PCA**, **random orthogonal projection**, and a **thresholding operation** — to produce compact binary codes.
+
+The resulting **Hashing-Baseline** produces compact binary codes that:  
+- Retain semantic similarity from the pretrained features  
+- Allow fast similarity search  
+
+This setup provides a straightforward reference for comparing more complex or learned hashing methods on large datasets.
 
 ---
 
-## Method Overview
+## ⚙️ Method Overview
 
 <img src="figures/Hashing-Baseline.png" alt="Overview of Hashing-Baseline" width="800"/>
 
-This pipeline extracts deep features from images or audio, compresses them into compact binary codes using PCA and random projection to enable fast similarity search.
+The **Hashing-Baseline** pipeline consists of four main steps:
 
 1. **Feature Extraction**  
-   Deep pre-trained models extract high-dimensional features from images or audio samples.  
+   Extract high-dimensional features from images or audio using pre-trained models.
 
 2. **Dimensionality Reduction with PCA**  
-   Principal Component Analysis (PCA) reduces feature dimensionality while preserving variance and important semantic structure.
+   Apply Principal Component Analysis (PCA) to reduce feature dimensionality while retaining key semantic information.
 
 3. **Random Orthogonal Projection and Binarization**  
-   After PCA, features are projected using a random orthogonal matrix, then binarized using sign function to produce compact binary hash codes.
+   Project PCA-reduced features with a random orthogonal matrix and binarize by checking whether values are **greater than 0**, resulting in compact 16-bit hash codes.
 
 4. **Retrieval**  
-   Retrieval is performed in the Hamming space for fast similarity search.
+   Perform similarity search in **Hamming space** using the binary codes.
+
+This simple pipeline shows that even standard hashing techniques can preserve semantic similarity when applied on strong pretrained features, without any additional training.
 
 ---
 
-## Retrieval Example
+## 🔎 Retrieval Example
 
-The figure below shows **two query images** and their **5 nearest neighbors** retrieved using:  
+The figure below shows **two query images** from the **Flickr25K dataset** and their **5 nearest neighbors**, retrieved using features from a **SimDINO ViT-B/16 model pretrained on ImageNet-1K (100 epochs)**.
 
-- **Original features**  
-- **Hashed 16-bit codes**  
+- **Original features** → continuous feature vectors extracted from the backbone (CLS token).  
+- **Hashed 16-bit codes** → binary codes produced by applying our Hashing-Baseline to the original features.  
 
-<img src="figures/5NN_retrieval.png" alt="5-NN Retrieval" width="800"/>
+<p align="center">
+  <img src="figures/5NN_retrieval.png" alt="5-NN Retrieval" width="800"/>
+</p>
 
-This demonstrates that Hashing-Baseline preserves semantic similarity.
+This demonstrates that **Hashing-Baseline preserves semantic similarity**, even with compact 16-bit codes.
 
----
-
-## Repository Structure
+## 📂 Repository Structure
 
 - **`image/`** — Contains code for image retrieval hashing.  
   Supports datasets: `cifar10`, `flickr25k`, and `coco`.  
@@ -63,7 +73,7 @@ This demonstrates that Hashing-Baseline preserves semantic similarity.
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
 1. **Clone the repository**  
    ```bash
@@ -82,7 +92,7 @@ This demonstrates that Hashing-Baseline preserves semantic similarity.
 
 ---
 
-## References
+## 📚 References
 
 #### Image Models
 - DFN: https://arxiv.org/abs/2309.17425
@@ -95,7 +105,8 @@ This demonstrates that Hashing-Baseline preserves semantic similarity.
 
 ---
 
-## To cite this work:
+## 📝 To cite this work:
+
 ```
 @misc{hashingbaseline,
       title={Hashing-Baseline: Rethinking Hashing in the Age of Pretrained Models}, 
